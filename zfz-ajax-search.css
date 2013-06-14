@@ -1,0 +1,16 @@
+.search-results .results,
+.search-results {
+  display: none;
+}
+
+.search-results.loading .loading-wrapper,
+.search-results.active .results,
+.search-results.active,
+.search-results.loading {
+  display: block;
+}
+
+.search-results .loading-wrapper {
+  display: none;
+  background: transparent url('loader.gif') center center no-repeat;
+}
