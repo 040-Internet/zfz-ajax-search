@@ -15,9 +15,10 @@
 **/
 
 function zfz_ajax_search_settings() {
-  $settings = array();
-  $settings['post_type'] = array('post', 'page');
-  $settings['no_results_text'] = __('We couldn\'t find anything that matched your search in this area.', 'zfz');
+  $settings = array(
+    'post_type' => array('post', 'page'),
+    'no_results_text' => __('We couldn\'t find anything that matched your search in this area.', 'zfz')
+  );
   return $settings;
 }
 
@@ -89,12 +90,16 @@ function zfz_ajax_search($search_query) {
   // Save our posts into different arrays for later grouping
   if($search->have_posts()) :
     while ($search->have_posts()) : $search->the_post();
-      $html = '';
-      $html .= '<a class="item" href="'. get_permalink() .'">';
-      $html .= get_the_title();
-      $html .= '</a>';
-      $type = get_post_type();
-      $results[$type][] = $html;
+      $html = array(
+        'el' => 'a',
+        'class' => 'item',
+        'href' => get_permalink(),
+        'content' => get_the_title(),
+        'type' => get_post_type()
+      );
+
+      extract($html);
+      $results[$type][] = '<'. $el .' class="'. $class .'" href="'. $href .'">'. $content .'</a>';
     endwhile;
   endif;
   wp_reset_postdata();
