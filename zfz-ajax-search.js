@@ -1,27 +1,28 @@
 (function($) {
 
-
   //
   // Ajax search
   //
   function ajax_search_init() {
 
-    var endpoint = window.location.protocol + "//" + window.location.host + '/searchapi';
+    var doc = $(document);
+    var endpoint = window.location.origin + window.location.pathname + '/searchapi';
     var searchform = $('form.searchform');
 
     searchform.after('<div class="search-results"><a href="#" class="close-results">Close</a><div class="loading-wrapper"></div><div class="results"></div></div>');
 
-    $('.close-results').click(function(e){
-      $(this).closest('.search-results').removeClass('active').removeClass('loading');
+    doc.on('click', '.close-results', function(e){
+      $(this).closest('.search-results').removeClass('active loading');
       $('.search-results .results').empty();
       e.preventDefault();
     });
 
-    searchform.submit(function(e){
+    doc.on('submit', searchform, function(e){
       $('.search-results').addClass('loading');
-      var query = $(this).find('input[name="s"]').val();
+      var query = encodeURIComponent($(this).find('input[name="s"]').val());
+      
       if(query.length > 0) {
-        $('.search-results .results').load(endpoint + '/' + query, function(e){
+        $('.search-results .results').load(endpoint + '/?ctis=' + query, function(e){
           $('.search-results').removeClass('loading').addClass('active');
         });
       } else {
@@ -33,11 +34,10 @@
     });
   }
 
-
   //
   // Vroom vroom
   //
-  jQuery(document).ready(function() {
+  $(function() {
     ajax_search_init();
   });
 
