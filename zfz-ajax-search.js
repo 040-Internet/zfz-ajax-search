@@ -22,7 +22,7 @@
       var query = encodeURIComponent($(this).find('input[name="s"]').val());
       
       if(query.length > 0) {
-        $('.search-results .results').load(endpoint + '/?ctis=' + query, function(e){
+        $('.search-results .results').load(endpoint + '/?zfzs=' + query, function(e){
           $('.search-results').removeClass('loading').addClass('active');
         });
       } else {

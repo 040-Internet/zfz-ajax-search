@@ -59,8 +59,8 @@ function zfz_add_endpoint() {
   $path_parts = array_filter($path_parts);
 
   if(in_array('searchapi', $path_parts)) {
-    if(isset($_GET['ctis'])) {
-      zfz_ajax_search($_GET['ctis']);
+    if(isset($_GET['zfzs'])) {
+      zfz_ajax_search($_GET['zfzs']);
     }
   }
 }
