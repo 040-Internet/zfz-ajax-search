@@ -6,7 +6,7 @@
   function ajax_search_init() {
 
     var doc = $(document);
-    var endpoint = window.location.origin + window.location.pathname + '/searchapi';
+    var endpoint = window.location.origin + window.location.pathname + 'searchapi';
     var searchform = $('form.searchform');
 
     searchform.after('<div class="search-results"><a href="#" class="close-results">Close</a><div class="loading-wrapper"></div><div class="results"></div></div>');
